@@ -8,38 +8,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayRollService {
-    private static List<EmployeePayRoll> empPayRollList;
-    private static Scanner sc = new Scanner(System.in);
+    private List<EmployeeData> employePayrollList = new ArrayList<EmployeeData>();
+    Scanner scanner = new Scanner(System.in);
 
-    public EmployeePayRollService(List<EmployeePayRoll> empPayRollList) {
-        EmployeePayRollService.empPayRollList = empPayRollList;
+    public void readEmployeeDataFromConsole() {
+        System.out.println("Enter Employee Id");
+        int id = scanner.nextInt();
+        System.out.println("Enter Employee Name");
+        String Name = scanner.next();
+        System.out.println("Enter the salary");
+        int salary = scanner.nextInt();
+        employePayrollList.add(new EmployeeData(id, Name, salary));
     }
 
-    public static void main(String[] args) {
-        ArrayList<EmployeePayRoll> empPayRollList = new ArrayList<EmployeePayRoll>();
-        EmployeePayRollService empPayRollService = new EmployeePayRollService(empPayRollList);
-
-        EmployeePayRollService.readData();
-
-        empPayRollService.writeData();
-
-    }
-
-    private static void readData() {
-        System.out.println("Please Enter the following details :");
-        System.out.println("Enter ID");
-        int id = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Enter Name :");
-        String name = sc.nextLine();
-        System.out.println("Enter Salary :");
-        double salary = sc.nextDouble();
-
-        EmployeePayRoll empPayRollObject = new EmployeePayRoll(id, name, salary);
-        empPayRollList.add(empPayRollObject);
-    }
-
-    private void writeData() {
-        System.out.println("Employee Pay Roll Data : \n" + empPayRollList.get(0).toString());
+    public void writeEmployeeDataInConsole() {
+        System.out.println("Writing Employee Pay Roll Data \n" + employePayrollList);
     }
 }
