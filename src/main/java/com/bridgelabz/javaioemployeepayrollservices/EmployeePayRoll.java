@@ -9,12 +9,10 @@ public class EmployeePayRoll {
     }
 
     private void writeEmployeeDataInConsole() {
-        // TODO Auto-generated method stub
 
     }
 
     private void readEmployeeDataFromConsole() {
-        // TODO Auto-generated method stub
 
     }
 }
