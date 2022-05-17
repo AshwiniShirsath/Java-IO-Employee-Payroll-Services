@@ -1,7 +1,7 @@
 package com.bridgelabz.javaioemployeepayrollservices;
 /*
  * @author : Ashwini
- * Create an Employee Payroll Service to Read and Write Employee Payroll to a Console
+ * Write a program to demonstrate File Operations like
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -43,4 +43,3 @@ public class EmployeePayRollService {
         System.out.println("Employee Pay Roll Data : \n" + empPayRollList.get(0).toString());
     }
 }
-
