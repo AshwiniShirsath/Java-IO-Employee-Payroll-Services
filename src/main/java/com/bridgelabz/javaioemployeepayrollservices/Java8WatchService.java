@@ -18,23 +18,20 @@ public class Java8WatchService {
     private WatchService watcher = null;
     private Map<WatchKey, Path> dirWatchers = null;
 
-    // creates a Watch Service and registers the given directory
     public Java8WatchService(Path dir) throws IOException {
         this.watcher = FileSystems.getDefault().newWatchService();
         this.dirWatchers = new HashMap<WatchKey, Path>();
         scanAndRegisterDirectories(dir);
     }
 
-    // register the given directory with watch service
     private void registerDirWatchers(Path dir) throws IOException {
         WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_CREATE,
                 StandardWatchEventKinds.ENTRY_DELETE);
         dirWatchers.put(key, dir);
     }
 
-    // register the given directory and all its sub directories,with watchers
     private void scanAndRegisterDirectories(final Path start) throws IOException {
-        // register directory and sub-directories
+
         Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
@@ -44,12 +41,10 @@ public class Java8WatchService {
         });
     }
 
-    // Process all events for key queued to watchers
-
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void processEvents() {
         while (true) {
-            WatchKey key; // wait for key to be signaled
+            WatchKey key;
             try {
                 key = watcher.take();
             } catch (InterruptedException e) {
@@ -63,9 +58,7 @@ public class Java8WatchService {
                 WatchEvent.Kind kind = event.kind();
                 Path name = ((WatchEvent<Path>) event).context();
                 Path child = dir.resolve(name);
-                System.out.format("%s: %s\n", event.kind().name(), child); // print out event
-
-                // if directory is created then register it and its sub directories
+                System.out.format("%s: %s\n", event.kind().name(), child);
 
                 if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
                     try {
@@ -84,8 +77,9 @@ public class Java8WatchService {
             if (!valid) {
                 dirWatchers.remove(key);
                 if (dirWatchers.isEmpty())
-                    break; // all directories are inaccessible
+                    break;
             }
         }
     }
+
 }

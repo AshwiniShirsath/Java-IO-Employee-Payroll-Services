@@ -1,7 +1,7 @@
 package com.bridgelabz.javaioemployeepayrollservices;
 /*
  * @author : Ashwini
- * Create an Employee Payroll Service to store Employee Payroll into a File
+ * Ability for Employee Payroll Service to read the Employee Payroll File so that some analysis can be performed
  */
 import java.io.File;
 import java.io.IOException;
